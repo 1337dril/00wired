@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hero Background */
+#tsparticles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Logo 
+[data-theme="garden"].logo {
+  stroke: #333;
+  fill: #333;
+  background-color: #333;
+}
+*/
+
+/* Scrollbars */
+/* firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(17, 24, 39) rgb(55, 65, 81);
+}
+/* rest */
+::-webkit-scrollbar {
+  @apply w-3;
+}
+::-webkit-scrollbar-track {
+  @apply bg-base-300 rounded-lg;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-focus rounded-lg border-[3px] border-solid border-base-300;
+}
