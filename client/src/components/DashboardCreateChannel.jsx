@@ -2,11 +2,12 @@ import { useState, useId, useRef } from "react";
 import useStore from "../store/useStore";
 import { createChannel } from "../utils/api";
 import {
-  channelConfirmPasswordValidator,
-  channelDescriptionValidator,
-  channelNameValidator,
-  channelPasswordValidator,
+  nameValidator as channelNameValidator,
+  descriptionValidator as channelDescriptionValidator,
+  passwordValidator as channelPasswordValidator,
+  confirmPasswordValidator as channelConfirmPasswordValidator,
 } from "../utils/validators";
+
 export default function DashboardCreateChannel() {
   const getUser = useStore((state) => state.getUser);
   const id = useId();
