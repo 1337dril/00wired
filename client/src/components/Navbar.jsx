@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import Logo from "./Logo";
-import ThemeSwither from "./ThemeSwitcher";
 
 export default function Navbar() {
   return (
@@ -34,7 +33,7 @@ export default function Navbar() {
                 </Link>
               </div>
             </li>
-            <li tabIndex={0}>
+            {/* <li tabIndex={0}>
               <a className="justify-between">
                 Theme
                 <svg
@@ -59,7 +58,7 @@ export default function Navbar() {
                   </button>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
         {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
@@ -83,9 +82,9 @@ export default function Navbar() {
           <li>
             <Link href="/signup">Signup</Link>
           </li>
-          <ThemeSwither />
+          {/* <ThemeSwither /> */}
           <div className="flex justify-center items-center">
-            <Link href="/app/dashboard" className="btn mr-4 btn-primary">
+            <Link href="/app/dashboard" className="btn mx-4 btn-primary">
               launch app
             </Link>
           </div>

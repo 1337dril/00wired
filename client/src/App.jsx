@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { themeChange } from "theme-change";
+// import { themeChange } from "theme-change";
 import { Redirect, Route, Switch } from "wouter";
 import Application from "./pages/Application";
 import FrontPage from "./pages/FrontPage";
@@ -7,10 +6,10 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 export default function App() {
-  useEffect(() => {
-    themeChange(false);
-    // 👆 false parameter is required for react project
-  }, []);
+  // useEffect(() => {
+  //   themeChange(false);
+  //   // 👆 false parameter is required for react project
+  // }, []);
   return (
     <Switch>
       <Route path="/">
