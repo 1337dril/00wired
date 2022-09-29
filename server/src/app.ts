@@ -25,10 +25,15 @@ class App {
     this.initMiddleware();
     this.initControllers(controllers);
     this.initErrorHandling();
+    if (process.env.NODE_ENV === "production") {
+      this.hostProductionBuild();
+    }
   }
   private initMiddleware(): void {
+    if (process.env.NODE_ENV === "development") {
+      this.express.use(cors(this.corsOptions));
+    }
     this.express.use(helmet());
-    // this.express.use(cors(this.corsOptions));
     this.express.use(morgan("dev"));
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: false }));
@@ -39,6 +44,8 @@ class App {
     controllers.forEach((controller: Controller) => {
       this.express.use("/api", controller.router);
     });
+  }
+  private hostProductionBuild(): void {
     this.express.use(express.static(path.join(__dirname, "build")));
     this.express.get("*", (req, res) => {
       res.sendFile(path.join(__dirname, "build", "index.html"));
