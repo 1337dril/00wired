@@ -66,7 +66,7 @@ export const registerUser = async (registrationData) => {
   });
   if (res.status === 400) {
     const resJson = await res.json();
-    if (Array.isArray(errors) && errors.length > 0) {
+    if (Array.isArray(resJson.errors) && resJson.errors.length > 0) {
       throw new Error(resJson.errors.join("|"));
     } else {
       throw new Error(resJson.message);
