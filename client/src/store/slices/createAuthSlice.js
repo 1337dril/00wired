@@ -2,7 +2,6 @@ import { fetchUserData, loginUser, registerUser } from "../../utils/api";
 
 const createAuthSlice = (set, get) => ({
   user: null,
-
   status: "idle",
   error: null,
   loginUser: async (loginInfo) => {
@@ -13,14 +12,14 @@ const createAuthSlice = (set, get) => ({
       set({ error: e });
     }
   },
-  signupUser: async (signupInfo) => {
-    try {
-      await registerUser(signupInfo);
-      set({ error: null });
-    } catch (e) {
-      set({ error: e });
-    }
-  },
+  // signupUser: async (signupInfo) => {
+  //   try {
+  //     await registerUser(signupInfo);
+  //     set({ error: null });
+  //   } catch (e) {
+  //     set({ error: e });
+  //   }
+  // },
   getUser: async () => {
     if (get().status !== "fetching") {
       try {

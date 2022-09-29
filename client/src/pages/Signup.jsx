@@ -1,36 +1,58 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import ParticlesBackground from "../components/ParticlesBackground";
-import useStore from "../store/useStore";
+import { registerUser } from "../utils/api";
+import { validateSignup } from "../utils/validators";
 
 export default function Signup() {
   const [, setLocation] = useLocation();
-  const signupUser = useStore((state) => state.signupUser);
   const usernameRef = useRef();
   const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
   const emailRef = useRef();
+  const [formError, setFormError] = useState([]);
 
   const signupHandler = async (e) => {
     e.preventDefault();
+    setFormError([]);
+
+    const clientValidationErrors = validateSignup({
+      username: usernameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      confirmPassword: confirmPasswordRef.current.value,
+    });
+
+    if (clientValidationErrors.length > 0) {
+      setFormError(clientValidationErrors);
+      passwordRef.current.value = "";
+      confirmPasswordRef.current.value = "";
+      return;
+    }
+
     try {
-      await signupUser({
+      await registerUser({
         username: usernameRef.current.value.trim(),
         email: emailRef.current.value.trim(),
         password: passwordRef.current.value,
       });
       setLocation("/app/dashboard");
     } catch (e) {
+      setFormError(e.message.split("|"));
       console.error(e);
     } finally {
       usernameRef.current.value = "";
-      passwordRef.current.value = "";
       emailRef.current.value = "";
+      passwordRef.current.value = "";
+      confirmPasswordRef.current.value = "";
     }
   };
+
   return (
     <div className="flex justify-center items-center bg-base-300 h-screen">
       <ParticlesBackground />
-      <div className="card w-96 glass h-1/2 relative">
+
+      <div className="card w-96 glass  min-h-fit relative">
         <button
           className="overflow-hidden btn btn-circle btn-outline rotate-[-90deg] absolute top-3 left-3"
           onClick={() => setLocation("/")}
@@ -73,10 +95,27 @@ export default function Signup() {
               placeholder="Password"
               className="input w-full my-1 max-w-xs"
             />
+            <input
+              type="password"
+              ref={confirmPasswordRef}
+              placeholder="Confirm Password"
+              className="input w-full my-1 max-w-xs"
+            />
+            <div className="my-2">
+              {formError.map((err, idx) => (
+                <div
+                  key={idx}
+                  className="my-1 border border-error rounded-sm p-2"
+                >
+                  <p className="text-sm font-semibold text-error">{err}</p>
+                </div>
+              ))}
+            </div>
 
             <div className="card-actions justify-center my-2">
               <button className="btn btn-primary">Signup!</button>
             </div>
+
             <div className="card-actions">
               <p>
                 Already have an account?{" "}
