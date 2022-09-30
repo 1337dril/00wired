@@ -7,6 +7,7 @@ import ApplicationSidebar from "../components/ApplicationSidebar";
 import Chatbox from "../components/Chatbox";
 import Dashboard from "../components/Dashboard";
 import Spinner from "../components/Spinner";
+import { fetchUserData } from "../utils/api";
 
 export default function Application() {
   const { getUser, authStatus, error, user } = useStore(
@@ -24,7 +25,7 @@ export default function Application() {
   const decodedCh = decodeURI(params?.ch) || null;
 
   useEffect(() => {
-    getUser().then(initSocket);
+    getUser().then(() => initSocket());
   }, []);
 
   if (authStatus === "fetching") return <Spinner />;
