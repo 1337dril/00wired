@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 const register = Joi.object({
-  username: Joi.string().min(4).max(30).required(),
+  username: Joi.string().min(4).max(50).required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(8).max(80).required(),
 });
