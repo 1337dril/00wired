@@ -235,11 +235,12 @@ export async function createChannel(
     body,
     headers,
   });
-  if (res.status !== 201) {
-    throw new Error(GENERIC_ERROR);
-  }
   const resJson = await res.json();
-  if (res.status === 201) {
+  if (res.status === 400) {
+    throw new Error(resJson?.errors.join("|"));
+  } else if (res.status !== 201) {
+    throw new Error(GENERIC_ERROR);
+  } else {
     return resJson;
   }
 }

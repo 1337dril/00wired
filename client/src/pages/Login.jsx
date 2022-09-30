@@ -1,28 +1,37 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import ParticlesBackground from "../components/ParticlesBackground";
-import useStore from "../store/useStore";
+
+import { validateLogin } from "../utils/validators";
+import { loginUser } from "../utils/api";
 
 export default function Login() {
   const [, setLocation] = useLocation();
-  const loginUser = useStore((state) => state.loginUser);
   const usernameRef = useRef();
   const passwordRef = useRef();
-
-  const loginHandler = async (e) => {
+  const [formError, setFormError] = useState([]);
+  const loginHandler = (e) => {
     e.preventDefault();
-    try {
-      await loginUser({
-        username: usernameRef.current.value.trim(),
-        password: passwordRef.current.value,
-      });
-      setLocation("/app/dashboard");
-    } catch (e) {
-      console.error(e);
-    } finally {
-      usernameRef.current.value = "";
+    const clientValidationErrors = validateLogin({
+      username: usernameRef.current?.value,
+      password: passwordRef.current?.value,
+    });
+    if (clientValidationErrors.length > 0) {
+      setFormError(clientValidationErrors);
       passwordRef.current.value = "";
+      return;
     }
+    loginUser({
+      username: usernameRef.current.value.trim(),
+      password: passwordRef.current.value,
+    })
+      .then(() => setLocation("/app/dashboard"))
+      .catch((e) => {
+        setFormError(e.message.split("|"));
+      })
+      .finally(() => {
+        passwordRef.current.value = "";
+      });
   };
   return (
     <div className="flex justify-center items-center bg-base-300 h-screen">
@@ -64,6 +73,16 @@ export default function Login() {
               placeholder="Password"
               className="input w-full my-1 max-w-xs"
             />
+            <div className="my-2">
+              {formError.map((err, idx) => (
+                <div
+                  key={idx}
+                  className="my-1 border border-error rounded-sm p-2"
+                >
+                  <p className="text-sm font-semibold text-error">{err}</p>
+                </div>
+              ))}
+            </div>
 
             <div className="card-actions justify-center my-2">
               <button className="btn btn-primary">Login!</button>

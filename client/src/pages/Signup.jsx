@@ -12,7 +12,7 @@ export default function Signup() {
   const emailRef = useRef();
   const [formError, setFormError] = useState([]);
 
-  const signupHandler = async (e) => {
+  const signupHandler = (e) => {
     e.preventDefault();
     setFormError([]);
 
@@ -29,23 +29,19 @@ export default function Signup() {
       confirmPasswordRef.current.value = "";
       return;
     }
-
-    try {
-      await registerUser({
-        username: usernameRef.current.value.trim(),
-        email: emailRef.current.value.trim(),
-        password: passwordRef.current.value,
+    registerUser({
+      username: usernameRef.current.value.trim(),
+      email: emailRef.current.value.trim(),
+      password: passwordRef.current.value,
+    })
+      .then(() => setLocation("/app/dashboard"))
+      .catch((e) => {
+        setFormError(e.message.split("|"));
+      })
+      .finally(() => {
+        passwordRef.current.value = "";
+        confirmPasswordRef.current.value = "";
       });
-      setLocation("/app/dashboard");
-    } catch (e) {
-      setFormError(e.message.split("|"));
-      console.error(e);
-    } finally {
-      usernameRef.current.value = "";
-      emailRef.current.value = "";
-      passwordRef.current.value = "";
-      confirmPasswordRef.current.value = "";
-    }
   };
 
   return (

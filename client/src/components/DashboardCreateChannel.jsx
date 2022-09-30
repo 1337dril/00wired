@@ -1,12 +1,7 @@
 import { useState, useId, useRef } from "react";
 import useStore from "../store/useStore";
 import { createChannel } from "../utils/api";
-import {
-  nameValidator as channelNameValidator,
-  descriptionValidator as channelDescriptionValidator,
-  passwordValidator as channelPasswordValidator,
-  confirmPasswordValidator as channelConfirmPasswordValidator,
-} from "../utils/validators";
+import { validateCreateChannel } from "../utils/validators";
 
 export default function DashboardCreateChannel() {
   const getUser = useStore((state) => state.getUser);
@@ -17,139 +12,49 @@ export default function DashboardCreateChannel() {
   const channelConfirmPasswordRef = useRef();
   const [isPasswordCheckbox, setIsPasswordCheckbox] = useState(false);
   const [isChannelPrivate, setIsChannelPrivate] = useState(false);
-  const [formError, setFormError] = useState({ status: false, message: "" });
+  const [formError, setFormError] = useState([]);
+
   const createChannelHandler = async (e) => {
     e.preventDefault();
-    const isValidChannelName = channelNameValidator(
-      channelNameRef.current.value.trim()
-    );
-    const isValidChannelDescription = channelDescriptionValidator(
-      channelDescriptionRef.current.value.trim()
-    );
-    // If a room has password
-    if (isPasswordCheckbox) {
-      const isValidChannelPassword = channelPasswordValidator(
+
+    const clientValidationErrors = validateCreateChannel({
+      channelName: channelNameRef.current?.value,
+      channelDescription: channelDescriptionRef.current?.value,
+      channelPasswordObj: {
+        isPassword: isPasswordCheckbox,
+        password: channelPasswordRef.current?.value,
+        confirmPassword: channelConfirmPasswordRef.current?.value,
+      },
+    });
+
+    if (clientValidationErrors.length > 0) {
+      setFormError(clientValidationErrors);
+      if (channelPasswordRef.current?.value)
+        channelPasswordRef.current.value = "";
+      if (channelConfirmPasswordRef.current?.value)
+        channelConfirmPasswordRef.current.value = "";
+      return;
+    }
+
+    try {
+      await createChannel(
+        channelNameRef.current.value.trim(),
+        channelDescriptionRef.current.value.trim(),
+        isChannelPrivate,
         channelPasswordRef.current?.value
       );
-      const isValidChannelConfirmPassword = channelConfirmPasswordValidator(
-        channelPasswordRef.current?.value,
-        channelConfirmPasswordRef.current?.value
-      );
-
-      const isValid =
-        isValidChannelName &&
-        isValidChannelDescription &&
-        isValidChannelPassword &&
-        isValidChannelConfirmPassword;
-
-      // Setting error state and returning
-      if (!isValid) {
-        if (!isValidChannelName) {
-          setFormError({
-            status: true,
-            message:
-              'Channel name has to be "> 3 characters" and "< 50 characters" and only contain the symbols "-" or "_".',
-          });
-        } else if (!isValidChannelDescription) {
-          setFormError({
-            status: true,
-            message: 'Channel description has to be "< 500 characters".',
-          });
-        } else if (!isValidChannelPassword) {
-          setFormError({
-            status: true,
-            message:
-              'Password has to be "> 8 characters" and "< 80 characters".',
-          });
-        } else if (!isValidChannelConfirmPassword) {
-          setFormError({
-            status: true,
-            message: '"Password" doesn\'t match "Confirm password."',
-          });
-        }
-        channelPasswordRef.current.value = "";
-        channelConfirmPasswordRef.current.value = "";
-        return;
-      }
-      // Trying to set post req to make channel
-      try {
-        await createChannel(
-          channelNameRef.current.value.trim(),
-          channelDescriptionRef.current.value.trim(),
-          isChannelPrivate,
-          channelPasswordRef.current.value
-        );
-
-        channelNameRef.current.value = "";
-        channelDescriptionRef.current.value = "";
-        if (channelPasswordRef.current.value) {
-          channelPasswordRef.current.value = "";
-        }
-        if (channelConfirmPasswordRef.current.value) {
-          channelConfirmPasswordRef.current.value = "";
-        }
-        setIsChannelPrivate(false);
-        setIsPasswordCheckbox(false);
-        setFormError({ status: false, message: "" });
-        await getUser();
-      } catch (e) {
-        setFormError({ status: true, message: e.message });
-        console.error(e);
-      }
-    }
-    // If channel didn't have password
-    else {
-      // Checking validitiy and returning if invalid input
-      const isValid = isValidChannelName && isValidChannelDescription;
-      if (!isValid) {
-        if (!isValidChannelName) {
-          setFormError({
-            status: true,
-            message:
-              'Channel name has to be "> 3 characters" and "< 50 characters".',
-          });
-        } else if (!isValidChannelDescription) {
-          setFormError({
-            status: true,
-            message: 'Channel description has to be "< 500 characters".',
-          });
-        }
-        channelPasswordRef.current.value = "";
-        channelConfirmPasswordRef.current.value = "";
-        return;
-      }
-      // Trying to post to create channel
-      try {
-        await createChannel(
-          channelNameRef.current?.value?.trim(),
-          channelDescriptionRef.current?.value?.trim(),
-          isChannelPrivate
-        );
-
-        if (channelNameRef.current?.value) {
-          channelNameRef.current.value = "";
-        }
-        if (channelDescriptionRef.current?.value) {
-          channelDescriptionRef.current.value = "";
-        }
-        if (channelPasswordRef.current?.value) {
-          channelPasswordRef.current.value = "";
-        }
-        if (channelConfirmPasswordRef.current?.value) {
-          channelConfirmPasswordRef.current.value = "";
-        }
-        setIsChannelPrivate(false);
-        setIsPasswordCheckbox(false);
-        setFormError({ status: false, message: "" });
-        await getUser();
-      } catch (e) {
-        setFormError({ status: true, message: e.message });
-        console.error(e);
-      }
+      channelNameRef.current.value = "";
+      channelDescriptionRef.current.value = "";
+      setIsChannelPrivate(false);
+      setIsPasswordCheckbox(false);
+      await getUser();
+    } catch (e) {
+      setFormError(e.message.split("|"));
     }
   };
   const isPasswordHandler = () => setIsPasswordCheckbox((prev) => !prev);
   const isChannelPrivateHandler = () => setIsChannelPrivate((prev) => !prev);
+
   return (
     <div className="w-full bg-base-300 rounded-lg lg:bg-base-100">
       <div className="p-5 w-full">
@@ -241,11 +146,16 @@ export default function DashboardCreateChannel() {
               Create channel
             </button>
           </div>
-          {formError?.status && (
-            <p className="bg-error border border-error text-error-content p-5 rounded-lg max-w-lg my-3">
-              {formError.message}
-            </p>
-          )}
+          <div className="my-2">
+            {formError.map((err, idx) => (
+              <div
+                key={idx}
+                className="my-1 border border-error rounded-sm p-2"
+              >
+                <p className="text-sm font-semibold text-error">{err}</p>
+              </div>
+            ))}
+          </div>
         </form>
       </div>
     </div>
