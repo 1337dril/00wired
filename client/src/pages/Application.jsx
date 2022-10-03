@@ -1,3 +1,7 @@
+/**
+ * TODO: do redirect logic in the useEffect (wait for getUser async to come back with results)
+ */
+
 import shallow from "zustand/shallow";
 import { useEffect } from "react";
 import { useRoute, Redirect } from "wouter";
