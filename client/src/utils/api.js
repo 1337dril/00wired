@@ -24,6 +24,13 @@ export const getToken = (key = authKey) => {
     return null;
   }
 };
+const removeToken = (key = authKey) => {
+  try {
+    window.localStorage.removeItem(key);
+  } catch (e) {
+    console.error(e);
+  }
+};
 const setToken = (value, key = authKey) => {
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
@@ -116,6 +123,9 @@ export const loginUser = async (loginData) => {
     throw new Error(GENERIC_ERROR);
   }
 };
+export function logoutUser() {
+  removeToken();
+}
 
 export async function fetchChannels(filter) {
   const token = getToken();
