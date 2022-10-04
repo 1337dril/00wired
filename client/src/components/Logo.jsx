@@ -1,8 +1,6 @@
-export default function Logo({ className, daisyColor = "primary" }) {
+export default function Logo({ className }) {
   return (
     <svg
-      // width="233"
-      // height="138"
       viewBox="0 0 233 138"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
