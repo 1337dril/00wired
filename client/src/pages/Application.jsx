@@ -1,40 +1,34 @@
-/**
- * TODO: do redirect logic in the useEffect (wait for getUser async to come back with results)
- */
-
 import shallow from "zustand/shallow";
 import { useEffect } from "react";
-import { useRoute, Redirect } from "wouter";
+import { useRoute, useLocation } from "wouter";
 import useStore from "../store/useStore";
 import ApplicationNavbar from "../components/ApplicationNavbar";
 import ApplicationSidebar from "../components/ApplicationSidebar";
 import Chatbox from "../components/Chatbox";
 import Dashboard from "../components/Dashboard";
 import Spinner from "../components/Spinner";
-import { fetchUserData } from "../utils/api";
 
 export default function Application() {
-  const { getUser, authStatus, error, user } = useStore(
+  const [, setLocation] = useLocation();
+  const { getUser, isLoading, user } = useStore(
     (state) => ({
       getUser: state.getUser,
-      authStatus: state.status,
-      error: state.error,
+      isLoading: state.isLoading,
       user: state.user,
     }),
     shallow
   );
   const initSocket = useStore((state) => state.initSocket);
-  // const socket = useStore((state) => state.socket);
   const [, params] = useRoute("/app/:ch");
   const decodedCh = decodeURI(params?.ch) || null;
 
   useEffect(() => {
-    getUser().then(() => initSocket());
+    getUser()
+      .then(() => initSocket())
+      .catch((e) => setLocation("/login"));
   }, []);
 
-  if (authStatus === "fetching") return <Spinner />;
-  if (authStatus === "done" && error) return <Redirect href="/login" />;
-  if (authStatus === "done" && user)
+  if (!isLoading && user) {
     return (
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -54,4 +48,7 @@ export default function Application() {
         </div>
       </div>
     );
+  } else {
+    return <Spinner />;
+  }
 }

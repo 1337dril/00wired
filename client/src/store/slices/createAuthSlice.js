@@ -1,22 +1,20 @@
-import { fetchUserData, loginUser, registerUser } from "../../utils/api";
+import { fetchUserData } from "../../utils/api";
 
 const createAuthSlice = (set, get) => ({
   user: null,
-  status: "idle",
-  error: null,
+  isLoading: false,
 
   getUser: async () => {
-    if (get().status !== "fetching") {
+    if (get().isLoading === false) {
       try {
-        set({ status: "fetching" });
+        set({ isLoading: true });
         const user = await fetchUserData();
         set({ user });
-        set({ error: null });
       } catch (e) {
         set({ user: null });
-        set({ error: e });
+        throw e;
       } finally {
-        set({ status: "done" });
+        set({ isLoading: false });
       }
     }
   },
