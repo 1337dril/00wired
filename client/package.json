@@ -1,7 +1,7 @@
 {
   "name": "00wired-client",
   "version": "1.1.0",
-  "author": "vood8008",
+  "author": "sezeef",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -16,7 +16,6 @@
     "socket.io-client": "^4.5.2",
     "tsparticles": "^2.2.4",
     "react-tsparticles": "^2.2.4",
-    "theme-change": "^2.2.0",
     "wouter": "^2.8.0-alpha.2",
     "zustand": "^4.1.1"
   },
