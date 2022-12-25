@@ -5,21 +5,21 @@ export default function FrontPageCard({
   imgSrc,
   imgAlt,
 }) {
+  const mirrorStyle = "bg-[#0c010c] rounded-none lg:flex-row-reverse";
+  let wrapperStyle =
+    "flex py-20 flex-col-reverse gap-3 items-center my-4 shadow-xl lg:px-20 lg:flex-row";
+  if (mirror) {
+    wrapperStyle += " ";
+    wrapperStyle += mirrorStyle;
+  }
   return (
-    <div
-      className={`card  lg:card-side bg-base-300 my-4 shadow-xl ${
-        mirror && "lg:flex-row-reverse"
-      }`}
-    >
+    <div className={wrapperStyle}>
       <figure className="p-2 max-w-2xl lg:p-10">
-        <img src={imgSrc} alt={imgAlt} className="h-96  shadow-lg" />
+        <img src={imgSrc} alt={imgAlt} className="h-64 lg:h-96 shadow-lg" />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">{title}</h2>
-        <p>{content}</p>
-        {/* <div className="card-actions justify-end">
-          <button className="btn btn-primary">Listen</button>
-        </div> */}
+      <div className="flex flex-col items-center gap-2">
+        <h2 className="text-3xl text-white font-bold">{title}</h2>
+        <p className="text-white text-lg">{content}</p>
       </div>
     </div>
   );
