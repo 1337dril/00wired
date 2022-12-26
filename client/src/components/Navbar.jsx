@@ -9,12 +9,12 @@ export default function Navbar() {
           <Logo className="h-24 w-36 cursor-pointer" />
         </Link>
       </div>
-      <div className="navbar-end hidden md:flex">
-        <ul className="menu menu-horizontal p-0">
-          <li>
+      <div className="w-1/2 hidden md:flex">
+        <ul className="flex justify-end gap-2 items-center text-lg w-full p-0">
+          <li className="h-1/2 hover:bg-purple-900 flex items-center hover:text-white p-2 rounded-lg transition-color duration-300">
             <Link href="/login">Login</Link>
           </li>
-          <li>
+          <li className="h-1/2 hover:bg-purple-900 flex items-center hover:text-white p-2 rounded-lg transition-color duration-300">
             <Link href="/signup">Signup</Link>
           </li>
           <div className="flex justify-center items-center">

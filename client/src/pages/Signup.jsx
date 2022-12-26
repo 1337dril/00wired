@@ -45,10 +45,10 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center bg-base-300 h-screen">
+    <div className="flex justify-center items-center h-screen">
       <ParticlesBackground />
 
-      <div className="card w-96 glass  min-h-fit relative">
+      <div className="card w-96 glass min-h-fit h-[95%] lg:h-4/5 relative">
         <button
           className="overflow-hidden btn btn-circle btn-outline rotate-[-90deg] absolute top-3 left-3"
           onClick={() => setLocation("/")}
@@ -109,13 +109,13 @@ export default function Signup() {
             </div>
 
             <div className="card-actions justify-center my-2">
-              <button className="btn btn-primary">Signup!</button>
+              <button className="btn btn-outline">Signup!</button>
             </div>
 
             <div className="card-actions">
               <p>
                 Already have an account?{" "}
-                <Link className="btn-link text-secondary" href="/login">
+                <Link className="btn-link text-purple-700 mt-5" href="/login">
                   Login
                 </Link>
               </p>
