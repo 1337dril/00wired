@@ -23,8 +23,8 @@
   @apply w-3;
 }
 ::-webkit-scrollbar-track {
-  @apply rounded-lg bg-base-300;
+  @apply rounded-lg bg-gray-800;
 }
 ::-webkit-scrollbar-thumb {
-  @apply rounded-lg border-[3px] border-solid border-base-300 bg-neutral-focus;
+  @apply rounded-lg border-[3px] border-solid border-gray-800 bg-gray-900;
 }

@@ -9,29 +9,29 @@ export default function DashboardYourChannels() {
   //   : user?.rooms_joined;
   const channels = user?.rooms_joined || [];
   return (
-    <div className="w-full bg-base-300 rounded-lg lg:bg-base-100">
-      <div className="p-5 w-full">
-        <h1 className="text-2xl  px-5">Your Channels</h1>
+    <div className="w-full bg-dark-gray-500 ">
+      <div className="w-full p-5">
+        <h1 className="px-5  text-2xl">Your Channels</h1>
         <div className="divider my-2" />
         {channels.map((channel) => (
-          <div key={channel.name} className="bg-base-200 my-2 shadow-xl">
-            <div className="flex lg:flex-row w-full p-5">
+          <div key={channel.name} className="my-2 bg-dark-gray-300 shadow-xl">
+            <div className="flex w-full p-5 lg:flex-row">
               <div className="w-4/5">
-                <h2 className="text-primary text-2xl font-bold">
+                <h2 className="text-2xl font-bold text-white">
                   {channel.name}
                 </h2>
-                <h3 className="text-xs leading-tight tracking-tighter text-base-content">
+                <h3 className="text-xs leading-tight tracking-tighter text-dark-gray-100">
                   Online:{" "}
                   <span className="">{channel.active_users_length || 0}</span> -
                   Total users:{" "}
                   <span className="">{channel.allowed_access_length || 0}</span>
                 </h3>
               </div>
-              <div className="lg:w-1/5 py-2 flex items-end justify-center">
+              <div className="flex items-end justify-center py-1 lg:w-1/5">
                 <Link
                   href={`/app/${channel.name}`}
                   onClick={() => addTab(channel.name)}
-                  className="btn modal-button btn-primary btn-sm"
+                  className="modal-button btn-outline btn-md btn"
                 >
                   Open
                 </Link>

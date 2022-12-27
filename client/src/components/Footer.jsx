@@ -3,7 +3,7 @@ import { useMemo } from "react";
 export default function Footer() {
   const year = useMemo(() => new Date().getFullYear(), []);
   return (
-    <footer className="flex p-4 bg-[#0c010c] text-neutral-content">
+    <footer className="flex bg-[#0c010c] p-4 text-dark-gray-100">
       <div className="flex w-1/2 items-center gap-2">
         <svg
           width="36"
@@ -18,7 +18,7 @@ export default function Footer() {
         </svg>
         <p>© {year} sezeef</p>
       </div>
-      <div className="flex justify-end gap-2 items-center w-1/2">
+      <div className="flex w-1/2 items-center justify-end gap-2">
         <a>
           <svg
             xmlns="http://www.w3.org/2000/svg"

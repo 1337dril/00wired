@@ -9,10 +9,10 @@ import tabsShowcaseImg from "../assets/tabs-showcase.png";
 
 export default function FrontPage() {
   return (
-    <div className="bg-black">
+    <div className="bg-black text-white">
       <Navbar />
       <HeroSection />
-      <main className="w-full flex justify-center my-8">
+      <main className="my-8 flex w-full justify-center">
         <div className="w-full">
           <FrontPageCard
             title="Create an invite-only place where you belong"

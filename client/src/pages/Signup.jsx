@@ -45,12 +45,12 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex h-screen items-center justify-center text-white">
       <ParticlesBackground />
 
-      <div className="card w-96 glass min-h-fit h-[95%] lg:h-4/5 relative">
+      <div className="card glass relative h-[95%] min-h-fit w-96 lg:h-4/5">
         <button
-          className="overflow-hidden btn btn-circle btn-outline rotate-[-90deg] absolute top-3 left-3"
+          className="btn-outline btn-circle btn absolute top-3 left-3 rotate-[-90deg] overflow-hidden"
           onClick={() => setLocation("/")}
         >
           <svg
@@ -77,45 +77,45 @@ export default function Signup() {
               type="text"
               ref={usernameRef}
               placeholder="Username"
-              className="input w-full my-1 max-w-xs"
+              className="input my-1 w-full max-w-xs"
             />
             <input
               type="email"
               ref={emailRef}
               placeholder="Email"
-              className="input w-full my-1 max-w-xs"
+              className="input my-1 w-full max-w-xs"
             />
             <input
               type="password"
               ref={passwordRef}
               placeholder="Password"
-              className="input w-full my-1 max-w-xs"
+              className="input my-1 w-full max-w-xs"
             />
             <input
               type="password"
               ref={confirmPasswordRef}
               placeholder="Confirm Password"
-              className="input w-full my-1 max-w-xs"
+              className="input my-1 w-full max-w-xs"
             />
             <div className="my-2">
               {formError.map((err, idx) => (
                 <div
                   key={idx}
-                  className="my-1 border border-error rounded-sm p-2"
+                  className="my-1 rounded-sm border border-error p-2"
                 >
                   <p className="text-sm font-semibold text-error">{err}</p>
                 </div>
               ))}
             </div>
 
-            <div className="card-actions justify-center my-2">
-              <button className="btn btn-outline">Signup!</button>
+            <div className="card-actions my-2 justify-center">
+              <button className="btn-outline btn">Signup!</button>
             </div>
 
             <div className="card-actions">
               <p>
                 Already have an account?{" "}
-                <Link className="btn-link text-purple-700 mt-5" href="/login">
+                <Link className="btn-link mt-5 text-purple-700" href="/login">
                   Login
                 </Link>
               </p>

@@ -8,33 +8,33 @@ const TABS = ["your-channels", "join-channels", "create-channel"];
 export default function Dashboard() {
   const [dashboardActiveTab, setDashboardActiveTab] = useState(TABS[0]);
   return (
-    <div className="h-screen lg:flex lg:flex-row-reverse">
-      <div className="lg:w-1/5 lg:my-24 lg:px-0 px-5 py-3 lg:border-neutral  lg:gap-4 text-base-content flex flex-col lg:border-l">
-        <h2 className="lg:font-bold text-xl px-5 lg:block">Your dashboard</h2>
+    <div className="h-screen bg-dark-gray-700 lg:flex lg:flex-row-reverse">
+      <div className="flex flex-col px-5 py-3 text-base-content lg:my-24  lg:w-1/5 lg:gap-4 lg:border-l lg:border-neutral lg:px-0">
+        <h2 className="px-5 text-xl lg:block lg:font-bold">Your dashboard</h2>
         <div className="divider my-0"></div>
         <a
-          className={`text-primary cursor-pointer pb-1 px-5 hover:underline ${
-            dashboardActiveTab === TABS[0] && "text-primary-focus underline"
+          className={`cursor-pointer px-5 pb-1 text-white hover:underline ${
+            dashboardActiveTab === TABS[0] && "text-dark-gray-100 underline"
           }`}
           onClick={() => setDashboardActiveTab(TABS[0])}
         >
-          - Your Channels
+          Your Channels
         </a>
         <a
-          className={`text-primary cursor-pointer pb-1 px-5 hover:underline ${
-            dashboardActiveTab === TABS[1] && "text-primary-focus underline"
+          className={`cursor-pointer px-5 pb-1 text-white hover:underline ${
+            dashboardActiveTab === TABS[1] && "text-dark-gray-100 underline"
           }`}
           onClick={() => setDashboardActiveTab(TABS[1])}
         >
-          - Join Channels
+          Join Channels
         </a>
         <a
-          className={`text-primary cursor-pointer pb-1 px-5 hover:underline ${
-            dashboardActiveTab === TABS[2] && "text-primary-focus underline"
+          className={`cursor-pointer px-5 pb-1 text-white hover:underline ${
+            dashboardActiveTab === TABS[2] && "text-dark-gray-100 underline"
           }`}
           onClick={() => setDashboardActiveTab(TABS[2])}
         >
-          - Create New Channel
+          Create New Channel
         </a>
       </div>
 

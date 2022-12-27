@@ -18,16 +18,16 @@ export default function ApplicationNavbar({}) {
     }
   }, []);
   return (
-    <div className="carousel bg-base-300 overflow-x-scroll  h-12 ">
+    <div className="carousel h-12 overflow-x-scroll  bg-dark-gray-700 ">
       <label
         htmlFor="my-drawer-2"
-        className="tab tab-lg tab-lifted border-none lg:hidden"
+        className="tab tab-lifted tab-lg border-none lg:hidden"
       >
         {"<<"}
       </label>
       <Link
         href="/app/dashboard"
-        className={`tab tab-lg  tab-lifted hidden lg:flex ${
+        className={`tab tab-lifted  tab-lg hidden lg:flex ${
           activeTab === "dashboard" && "tab-active"
         }`}
         onClick={() => switchTab("dashboard")}
@@ -36,14 +36,14 @@ export default function ApplicationNavbar({}) {
       </Link>
       <div className="divider divider-vertical "></div>
 
-      <div className="carousel carousel-center overflow-y-hidden">
+      <div className="carousel-center carousel overflow-y-hidden ">
         {tabs &&
           [...tabs].map((tab) => (
             <Link
               key={tab}
               href={`/app/${tab}`}
-              className={`tab tab-lg carousel-item relative pr-5 tab-lifted ${
-                activeTab === tab && "tab-active"
+              className={`carousel-item tab tab-lifted tab-lg relative pr-5 ${
+                activeTab === tab && "tab-active bg-red-500"
               }`}
               onClick={() => {
                 if (activeTab === tab) {
@@ -57,7 +57,7 @@ export default function ApplicationNavbar({}) {
             >
               {tab}
               <div
-                className={`absolute right-1  top-3 z-20 justify-center items-center hover:bg-red-500 bg-red-400 w-3 h-3 text-xs rounded-full ${
+                className={`absolute right-1  top-3 z-20 h-3 w-3 items-center justify-center rounded-full bg-red-400 text-xs hover:bg-red-500 ${
                   activeTab === tab ? "flex" : "hidden"
                 }`}
               />

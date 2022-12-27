@@ -10,20 +10,20 @@ export default function ApplicationSidebar() {
   const switchTab = useStore((state) => state.switchTab);
   console.log(user);
   return (
-    <div className="overflow-hidden relative w-80 bg-base-300">
-      <div className="flex justify-between items-center h-20 p-2">
+    <div className="relative w-80 overflow-hidden bg-dark-gray-900">
+      <div className="flex h-20 items-center justify-between bg-dark-gray-700 p-2">
         <Link href="/">
-          <button className="btn bg-base-300 border-none h-full">
+          <button className="btn h-full border-none bg-dark-gray-700">
             <Logo className="h-full" />
           </button>
         </Link>
         <Link href="/app/dashboard" onClick={() => switchTab("dashboard")}>
-          <button className="btn bg-base-300 ">Dashboard</button>
+          <button className="btn bg-dark-gray-700 ">Dashboard</button>
         </Link>
       </div>
-      <ul className="menu p-4 overflow-y-scroll h-[calc(100%-10rem)] w-full bg-base-300 text-base-content">
+      <ul className="menu h-[calc(100%-10rem)] w-full overflow-y-scroll bg-dark-gray-700 p-4 text-base-content">
         {channels.map((channel, idx) => (
-          <li key={idx}>
+          <li key={idx} className="rounded bg-dark-gray-500">
             <Link
               href={`/app/${channel.name}`}
               onClick={() => addTab(channel.name)}
@@ -33,14 +33,14 @@ export default function ApplicationSidebar() {
           </li>
         ))}
       </ul>
-      <div className="absolute bottom-0 h-20 bg-base-200 flex p-5 items-center justify-between w-full">
+      <div className="absolute bottom-0 flex h-20 w-full items-center justify-between bg-dark-gray-900 p-5">
         <div>
           <span className="text-lg font-bold">{user?.username}</span>
         </div>
         <div>
           <Link
             href="/"
-            className="btn btn-outline btn-error btn-sm"
+            className="btn-outline btn-error btn-sm btn"
             onClick={() => {
               logoutUser();
             }}
