@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hero Background */
+/* ---- Hero Background ---- */
 #tsparticles {
   position: absolute;
   top: 0;
@@ -12,7 +12,7 @@
   background: black;
 }
 
-/* Scrollbars */
+/* ---- Scrollbars ----- */
 /* firefox */
 * {
   scrollbar-width: thin;
@@ -23,8 +23,8 @@
   @apply w-3;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-base-300 rounded-lg;
+  @apply rounded-lg bg-base-300;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-focus rounded-lg border-[3px] border-solid border-base-300;
+  @apply rounded-lg border-[3px] border-solid border-base-300 bg-neutral-focus;
 }
