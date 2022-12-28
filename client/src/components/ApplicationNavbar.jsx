@@ -18,7 +18,7 @@ export default function ApplicationNavbar({}) {
     }
   }, []);
   return (
-    <div className="carousel h-12 overflow-x-scroll  bg-dark-gray-700 ">
+    <div className="carousel h-12 overflow-x-scroll border-b bg-dark-gray-700 ">
       <label
         htmlFor="my-drawer-2"
         className="tab tab-lifted tab-lg border-none lg:hidden"

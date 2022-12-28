@@ -32,8 +32,11 @@ export default function AddToChannelModal({ channel }) {
         htmlFor={`${channel}-adduser-modal`}
         className="modal cursor-pointer"
       >
-        <label className="modal-box relative" htmlFor="">
-          <h3 className="text-lg font-bold text-secondary">{channel}</h3>
+        <label
+          className="modal-box relative bg-dark-gray-700 text-white"
+          htmlFor=""
+        >
+          <h3 className="py-3 text-lg font-bold ">{channel}</h3>
           <form
             onSubmit={AddToChannelHandler}
             className="flex flex-col items-center"
@@ -41,16 +44,16 @@ export default function AddToChannelModal({ channel }) {
             <input
               type="username"
               placeholder="Username"
-              className="input input-bordered w-full my-2 max-w-xs"
+              className="input-bordered input my-2 w-full max-w-xs"
               ref={usernameRef}
             />
             {successfullyAddedUser && (
               <div>
                 Successfully added{" "}
-                <span className="text-primary">{successfullyAddedUser}</span>
+                <span className="">{successfullyAddedUser}</span>
               </div>
             )}
-            <button className="btn glass my-1" type="submit">
+            <button className="glass btn my-1" type="submit">
               Add user
             </button>
           </form>

@@ -84,12 +84,12 @@ export default function Chatbox({ ch }) {
   };
   return (
     <div className="h-[calc(100vh-10rem)]">
-      <div className=" h-14 w-full">
-        <ul className="flex justify-end items-center h-full">
+      <div className="h-14 w-full">
+        <ul className="flex h-full items-center justify-end">
           <li className="">
             <label
               htmlFor={`${ch}-adduser-modal`}
-              className="btn mx-2 btn-primary btn-sm modal-button"
+              className="modal-button btn-primary btn-sm btn mx-2"
             >
               Add to channel
             </label>
@@ -97,7 +97,7 @@ export default function Chatbox({ ch }) {
           </li>
           <li>
             <button
-              className="btn mx-2 btn-accent btn-sm"
+              className="btn-accent btn-sm btn mx-2"
               onClick={leaveChannelHandler}
             >
               leave channel
@@ -115,10 +115,10 @@ export default function Chatbox({ ch }) {
             <input
               type="text"
               placeholder={`Message #${ch}`}
-              className="input input-bordered w-full "
+              className="input-bordered input w-full "
               ref={newMessageRef}
             />
-            <button className="btn btn-md">Send</button>
+            <button className="btn-md btn">Send</button>
           </div>
         </div>
       </form>

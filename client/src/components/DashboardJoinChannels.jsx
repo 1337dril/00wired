@@ -22,9 +22,9 @@ export default function DashboardJoinChannels() {
   const debouncedFilterHandler = useCallback(debounce(filterHandler, 300), []);
 
   return (
-    <div className="w-full bg-base-300 rounded-lg lg:bg-base-100">
-      <div className="p-5 w-full">
-        <h1 className="text-2xl  px-5">Join Channels</h1>
+    <div className="w-full border-l bg-dark-gray-500">
+      <div className="w-full p-5">
+        <h1 className="px-5  text-2xl">Join Channels</h1>
         <div className="divider my-2" />
         <form className="my-1 w-full px-5" onSubmit={(e) => e.preventDefault()}>
           <SearchInput filterHandler={debouncedFilterHandler} />

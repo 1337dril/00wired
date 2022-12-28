@@ -8,8 +8,8 @@ const TABS = ["your-channels", "join-channels", "create-channel"];
 export default function Dashboard() {
   const [dashboardActiveTab, setDashboardActiveTab] = useState(TABS[0]);
   return (
-    <div className="h-screen bg-dark-gray-700 lg:flex lg:flex-row-reverse">
-      <div className="flex flex-col px-5 py-3 text-base-content lg:my-24  lg:w-1/5 lg:gap-4 lg:border-l lg:border-neutral lg:px-0">
+    <div className="min-h-screen bg-dark-gray-700 lg:flex lg:flex-row-reverse">
+      <div className="flex flex-col  px-5 py-3 text-base-content   lg:w-1/5 lg:gap-4 lg:border-l lg:border-neutral lg:px-0">
         <h2 className="px-5 text-xl lg:block lg:font-bold">Your dashboard</h2>
         <div className="divider my-0"></div>
         <a

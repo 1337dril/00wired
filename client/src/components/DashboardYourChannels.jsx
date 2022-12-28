@@ -9,7 +9,7 @@ export default function DashboardYourChannels() {
   //   : user?.rooms_joined;
   const channels = user?.rooms_joined || [];
   return (
-    <div className="w-full bg-dark-gray-500 ">
+    <div className="w-full border-l bg-dark-gray-500">
       <div className="w-full p-5">
         <h1 className="px-5  text-2xl">Your Channels</h1>
         <div className="divider my-2" />

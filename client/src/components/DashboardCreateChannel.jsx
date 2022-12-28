@@ -56,9 +56,9 @@ export default function DashboardCreateChannel() {
   const isChannelPrivateHandler = () => setIsChannelPrivate((prev) => !prev);
 
   return (
-    <div className="w-full bg-base-300 rounded-lg lg:bg-base-100">
-      <div className="p-5 w-full">
-        <h1 className="text-2xl  px-5">Create New Channel</h1>
+    <div className="w-full border-l bg-dark-gray-500">
+      <div className="w-full p-5">
+        <h1 className="px-5  text-2xl">Create New Channel</h1>
         <div className="divider my-2" />
         <form onSubmit={createChannelHandler}>
           <div className="form-control py-3">
@@ -72,7 +72,7 @@ export default function DashboardCreateChannel() {
               id={"channelName-" + id}
               placeholder="Channel name"
               ref={channelNameRef}
-              className="input input-bordered w-full max-w-lg"
+              className="input-bordered input w-full max-w-lg"
             />
           </div>
 
@@ -84,13 +84,13 @@ export default function DashboardCreateChannel() {
               id={"channelDescription-" + id}
               placeholder="Channel description..."
               ref={channelDescriptionRef}
-              className="textarea textarea-bordered w-full max-w-lg"
+              className="textarea-bordered textarea w-full max-w-lg"
             />
           </div>
           <div className="">
             <label
               htmlFor={"isPassword- " + id}
-              className="label cursor-pointer max-w-xs"
+              className="label max-w-xs cursor-pointer"
             >
               <span className="label-text">Password?</span>
               <input
@@ -98,7 +98,7 @@ export default function DashboardCreateChannel() {
                 checked={isPasswordCheckbox}
                 id={"isPassword- " + id}
                 // className="form-check-input mt-1 ml-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-skin-accent bg-skin-fill bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-skin-accent checked:bg-skin-accent focus:outline-none"
-                className="checkbox checkbox-primary"
+                className="checkbox-primary checkbox"
                 onChange={isPasswordHandler}
               />
             </label>
@@ -109,14 +109,14 @@ export default function DashboardCreateChannel() {
                   id={"channelPassword-" + id}
                   placeholder="Password"
                   ref={channelPasswordRef}
-                  className="input input-bordered w-full max-w-lg"
+                  className="input-bordered input w-full max-w-lg"
                 />
                 <input
                   type="password"
                   id={"confirmChannelPassword-" + id}
                   placeholder="Confirm password"
                   ref={channelConfirmPasswordRef}
-                  className="input input-bordered w-full max-w-lg"
+                  className="input-bordered input w-full max-w-lg"
                 />
               </div>
             )}
@@ -124,7 +124,7 @@ export default function DashboardCreateChannel() {
           <div className="">
             <label
               htmlFor={"isChannelPrivate- " + id}
-              className="label cursor-pointer max-w-xs"
+              className="label max-w-xs cursor-pointer"
             >
               <span className="label-text">Private?</span>
               <input
@@ -132,17 +132,17 @@ export default function DashboardCreateChannel() {
                 id={"isChannelPrivate- " + id}
                 checked={isChannelPrivate}
                 onChange={isChannelPrivateHandler}
-                className="checkbox checkbox-primary"
+                className="checkbox-primary checkbox"
                 // className="form-check-input mt-1 ml-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-skin-accent bg-skin-fill bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-skin-accent checked:bg-skin-accent focus:outline-none"
               />
             </label>
-            <p className=" px-3 text-base-content text-sm leading-4 tracking-tight max-w-md">
+            <p className=" max-w-md px-3 text-sm leading-4 tracking-tight text-base-content">
               Private channels cannot be discovered via lookups and can only be
               joined through invitations..
             </p>
           </div>
-          <div className="flex justify-center mt-4 max-w-lg w-full">
-            <button type="submit" className="btn btn-primary ">
+          <div className="mt-4 flex w-full max-w-lg justify-center">
+            <button type="submit" className="btn-primary btn ">
               Create channel
             </button>
           </div>
@@ -150,7 +150,7 @@ export default function DashboardCreateChannel() {
             {formError.map((err, idx) => (
               <div
                 key={idx}
-                className="my-1 border border-error rounded-sm p-2"
+                className="my-1 rounded-sm border border-error p-2"
               >
                 <p className="text-sm font-semibold text-error">{err}</p>
               </div>

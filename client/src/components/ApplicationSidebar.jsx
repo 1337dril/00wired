@@ -11,14 +11,16 @@ export default function ApplicationSidebar() {
   console.log(user);
   return (
     <div className="relative w-80 overflow-hidden bg-dark-gray-900">
-      <div className="flex h-20 items-center justify-between bg-dark-gray-700 p-2">
+      <div className="flex h-20 items-center justify-around bg-dark-gray-700 p-2">
         <Link href="/">
           <button className="btn h-full border-none bg-dark-gray-700">
             <Logo className="h-full" />
           </button>
         </Link>
         <Link href="/app/dashboard" onClick={() => switchTab("dashboard")}>
-          <button className="btn bg-dark-gray-700 ">Dashboard</button>
+          <button className="glass btn-sm btn bg-dark-gray-700">
+            Dashboard
+          </button>
         </Link>
       </div>
       <ul className="menu h-[calc(100%-10rem)] w-full overflow-y-scroll bg-dark-gray-700 p-4 text-base-content">

@@ -24,9 +24,12 @@ export default function JoinChannelModal({ channel }) {
         id={`${channel.name}-modal`}
         className="modal-toggle"
       />
-      <label htmlFor={`${channel.name}-modal`} className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor="">
-          <h3 className="text-lg font-bold text-secondary">{channel.name}</h3>
+      <label
+        htmlFor={`${channel.name}-modal`}
+        className="modal cursor-pointer text-white"
+      >
+        <label className="modal-box relative bg-dark-gray-700" htmlFor="">
+          <h3 className="text-lg font-bold ">{channel.name}</h3>
           <p className="py-4">{channel.description}</p>
           <form
             onSubmit={joinChannelHandler}
@@ -36,11 +39,11 @@ export default function JoinChannelModal({ channel }) {
               <input
                 type="password"
                 placeholder="Password"
-                className="input input-bordered w-full my-2 max-w-xs"
+                className="input-bordered input my-2 w-full max-w-xs"
                 ref={passwordRef}
               />
             )}
-            <button className="btn glass my-1" type="submit">
+            <button className="glass btn my-1" type="submit">
               Join {channel.name}
             </button>
           </form>

@@ -30,7 +30,7 @@ export default function Application() {
 
   if (!isLoading && user) {
     return (
-      <div className="drawer-mobile drawer text-white">
+      <div className="drawer-mobile drawer bg-dark-gray-500 text-white">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content ">
           {/* <!-- Page content here --> */}
