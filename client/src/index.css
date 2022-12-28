@@ -16,15 +16,15 @@
 /* firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgb(17, 24, 39) rgb(55, 65, 81);
+  scrollbar-color: #36393f #292b2f;
 }
 /* rest */
 ::-webkit-scrollbar {
   @apply w-3;
 }
 ::-webkit-scrollbar-track {
-  @apply rounded-lg bg-gray-800;
+  @apply bg-dark-gray-700;
 }
 ::-webkit-scrollbar-thumb {
-  @apply rounded-lg border-[3px] border-solid border-gray-800 bg-gray-900;
+  @apply rounded-lg border-[3px] border-solid border-dark-gray-300 bg-dark-gray-300;
 }
