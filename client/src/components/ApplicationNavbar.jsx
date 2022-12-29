@@ -8,12 +8,14 @@ export default function ApplicationNavbar({}) {
   const switchTab = useStore((state) => state.switchTab);
   const removeTab = useStore((state) => state.removeTab);
   const addTab = useStore((state) => state.addTab);
+  const user = useStore((state) => state.user);
   const [, setLocation] = useLocation();
   const [match, { ch }] = useRoute("/app/:ch");
   const decodedCh = decodeURI(ch);
 
   useEffect(() => {
-    if (tabs.length === 0 && match && decodedCh !== "dashboard") {
+    const isAllowed = user?.rooms_joined?.find((r) => r?.name === ch);
+    if (tabs.length === 0 && match && decodedCh !== "dashboard" && isAllowed) {
       addTab(decodedCh);
     }
   }, []);
@@ -39,19 +41,19 @@ export default function ApplicationNavbar({}) {
       <div className="carousel-center carousel overflow-y-hidden ">
         {tabs &&
           [...tabs].map((tab) => (
-            <Link
+            <a
               key={tab}
-              href={`/app/${tab}`}
               className={`carousel-item tab tab-lifted tab-lg relative pr-5 ${
                 activeTab === tab && "tab-active bg-red-500"
               }`}
               onClick={() => {
                 if (activeTab === tab) {
+                  removeTab(tab);
                   switchTab("dashboard");
                   setLocation("/app/dashboard");
-                  removeTab(tab);
                 } else {
                   switchTab(tab);
+                  setLocation(`/app/${tab}`);
                 }
               }}
             >
@@ -61,7 +63,7 @@ export default function ApplicationNavbar({}) {
                   activeTab === tab ? "flex" : "hidden"
                 }`}
               />
-            </Link>
+            </a>
           ))}
       </div>
     </div>

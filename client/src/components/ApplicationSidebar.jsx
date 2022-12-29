@@ -8,7 +8,6 @@ export default function ApplicationSidebar() {
   const channels = user.rooms_joined;
   const addTab = useStore((state) => state.addTab);
   const switchTab = useStore((state) => state.switchTab);
-  console.log(user);
   return (
     <div className="relative w-80 overflow-hidden bg-dark-gray-900">
       <div className="flex h-20 items-center justify-around bg-dark-gray-700 p-2">

@@ -1,5 +1,5 @@
 import shallow from "zustand/shallow";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import useStore from "../store/useStore";
 import ApplicationNavbar from "../components/ApplicationNavbar";
@@ -10,14 +10,12 @@ import Spinner from "../components/Spinner";
 
 export default function Application() {
   const [, setLocation] = useLocation();
-  const { getUser, isLoading, user } = useStore(
-    (state) => ({
-      getUser: state.getUser,
-      isLoading: state.isLoading,
-      user: state.user,
-    }),
-    shallow
-  );
+  const { getUser, isLoading, user, tabs } = useStore((state) => ({
+    getUser: state.getUser,
+    isLoading: state.isLoading,
+    user: state.user,
+    tabs: state.tabs,
+  }));
   const initSocket = useStore((state) => state.initSocket);
   const [, params] = useRoute("/app/:ch");
   const decodedCh = decodeURI(params?.ch) || null;

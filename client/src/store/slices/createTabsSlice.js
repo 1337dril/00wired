@@ -2,8 +2,13 @@ const createTabsSlice = (set, get) => ({
   tabs: [],
   activeTab: "dashboard",
   addTab: (tab) => {
+    let isOpen = get().tabs.some((t) => t === tab);
+    if (isOpen) {
+      get().switchTab(tab);
+      return;
+    }
     set({
-      tabs: new Set([...get().tabs, tab]),
+      tabs: [...get().tabs, tab],
       activeTab: tab,
     });
   },
@@ -14,7 +19,7 @@ const createTabsSlice = (set, get) => ({
   },
   removeTab: (tab) => {
     set({
-      tabs: Array.from(get().tabs).filter((t) => t !== tab),
+      tabs: get().tabs.filter((t) => t !== tab),
     });
   },
 });

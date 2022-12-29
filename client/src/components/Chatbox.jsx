@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import useStore from "../store/useStore";
 import ChatMessage from "./ChatMessage";
 import { useLocation } from "wouter";
-import JoinChannelModal from "./JoinChannelModal";
 import AddToChannelModal from "./AddToChannelModal";
 import { leaveChannel } from "../utils/api";
 
@@ -21,17 +20,21 @@ export default function Chatbox({ ch }) {
   const removeTab = useStore((state) => state.removeTab);
   const switchTab = useStore((state) => state.switchTab);
   const getUser = useStore((state) => state.getUser);
+  const addTab = useStore((state) => state.addTab);
   const [, setLocation] = useLocation();
   const newMessageRef = useRef();
   const messagesEl = useRef();
   useEffect(() => {
     // TODO: show form to join the room or redirect if no room or if private
-
     const isAllowed = user?.rooms_joined?.find((r) => r?.name === ch);
     if (!isAllowed) {
       setLocation("/app/dashboard");
+      switchTab("dashboard");
+      return;
     }
+    addTab(ch);
   }, [ch]);
+
   useEffect(() => {
     if (socket) {
       initMessages(ch);
